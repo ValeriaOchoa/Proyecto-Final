@@ -9,8 +9,12 @@ def main():
     pygame.display.set_caption("Modulo Music")#sonido
     fondo = pygame.image.load("fondo.png")##imagen del fondo
     Imagen = pygame.image.load("Mario.png")
-    coordX = 300
-    coordY = 200
+    enemigo = pygame.image.load("enemigo2.png")
+    coordX = 275
+    coordY = 820
+    cordx=1200
+    cordy=800
+    cordenadas =(cordx,cordy)
     Coordenadas = (coordX, coordY)
     posXfondo = 0
     posYfondo = 0
@@ -51,6 +55,7 @@ def main():
                 elif evento.key == pygame.K_UP:
                     incrementoY = -5
            if evento.type == pygame.KEYUP:
+               
                incrementoX = 0
                incrementoY = 0
 
@@ -58,6 +63,8 @@ def main():
         coordY = coordY + incrementoY
 
         Coordenadas = (coordX, coordY)
+        if(coordX==1100):
+            print("COLISION")
 
 
 
@@ -77,7 +84,8 @@ def main():
         pantalla.fill(Blanco)
         pantalla.blit(fondo,(posXfondo,posYfondo)) ## posicion del fondo
         pantalla.blit(contador,(300,5))##Imprime el tiempo del juego
-        pantalla.blit(Imagen, Coordenadas) 
+        pantalla.blit(Imagen, Coordenadas)
+        pantalla.blit(enemigo,cordenadas)
         pygame.display.update() #actualizo el display
            
     pygame.quit()##sale de la ventana
