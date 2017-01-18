@@ -6,6 +6,7 @@ def main():
     pygame.init() # inicializo el modulo
     #Le damos dimensiones a la pantalla del juego 
     pantalla=pygame.display.set_mode((1920,1080))
+    pygame.display.set_caption("Modulo Music")#sonido
     fondo = pygame.image.load("fondo.png")##imagen del fondo
     Imagen = pygame.image.load("Mario.png")
     coordX = 300
@@ -19,11 +20,22 @@ def main():
     info=fuente1.render("Tiempo",0,(25,25,25))##Guarda la informacion para que infrima la palabra de tiempo
     salir=False##lo inicializamos en false para que cumpla la funcion del while
     reloj1=pygame.time.Clock()
+    pygame.mixer.music.load("Mario.mp3")#llamada a la musica
+    pygame.mixer.music.play(1)
     blanco=(255,255,255)#crear el color blanco
     tiempo=180##el tiempo del juego que va aser de 3 minutos para pasar el nivle
     incrementoX = 0
     incrementoY = 0
+    for eventos in pygame.event.get(): ## SONIDO
+        if eventos.type == pygame.QUIT:
+            exit()
+        if eventos.type == pygame.KEYDOWN:
+            if eventos.key == pygame.K_p:
+                pygame.mixer.music()
+        reloj1.tick(0.5)
     while salir!=True:
+       
+##        pygame.display.update()
        # Manejador de eventos
         for evento in pygame.event.get():
         # Pulsación de la tecla escape
@@ -46,6 +58,7 @@ def main():
         coordY = coordY + incrementoY
 
         Coordenadas = (coordX, coordY)
+
 
 
         
@@ -72,3 +85,4 @@ def main():
 
     
 main() 
+
