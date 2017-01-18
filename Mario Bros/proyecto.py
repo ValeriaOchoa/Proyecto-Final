@@ -65,10 +65,10 @@ def main():
         Coordenadas = (coordX, coordY)
         if(coordX==1100):
             print("COLISION")
+            exit()
 
 
-
-        
+              
         #recorro todos los eventos producidos
         for event in pygame.event.get():
             # si el evento es cerrar la ventana 
@@ -80,6 +80,8 @@ def main():
         segundos=tiempo-pygame.time.get_ticks()/1000
         segundos=int(segundos)##transformamos la imagen a int
         segundos=str(segundos)##la transformamos a texto para poderla imprimir en pantalla
+
+        incrementoX=5
         contador=fuente1.render(segundos,0,(0,0,230))##imprimimos nuestro contador de tiempo
         pantalla.fill(Blanco)
         pantalla.blit(fondo,(posXfondo,posYfondo)) ## posicion del fondo
