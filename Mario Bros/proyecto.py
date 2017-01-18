@@ -5,8 +5,12 @@ from pygame.locals import*
 def main():
     pygame.init() # inicializo el modulo
     #Le damos dimensiones a la pantalla del juego 
-    pantalla=pygame.display.set_mode((1200,800))
+    pantalla=pygame.display.set_mode((1920,1080))
     fondo = pygame.image.load("fondo.png")##imagen del fondo
+    Imagen = pygame.image.load("Mario.png")
+    coordX = 300
+    coordY = 200
+    Coordenadas = (coordX, coordY)
     posXfondo = 0
     posYfondo = 0
     Blanco = (253,254,254) ## color de fondo
@@ -17,7 +21,34 @@ def main():
     reloj1=pygame.time.Clock()
     blanco=(255,255,255)#crear el color blanco
     tiempo=180##el tiempo del juego que va aser de 3 minutos para pasar el nivle
+    incrementoX = 0
+    incrementoY = 0
     while salir!=True:
+       # Manejador de eventos
+        for evento in pygame.event.get():
+        # Pulsación de la tecla escape
+           if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_ESCAPE:
+                    sys.exit()
+                elif evento.key == pygame.K_RIGHT:
+                    incrementoX = 5
+                elif evento.key == pygame.K_DOWN:
+                    incrementoY = 5
+                elif evento.key == pygame.K_LEFT:
+                    incrementoX = -5
+                elif evento.key == pygame.K_UP:
+                    incrementoY = -5
+           if evento.type == pygame.KEYUP:
+               incrementoX = 0
+               incrementoY = 0
+
+        coordX = coordX + incrementoX
+        coordY = coordY + incrementoY
+
+        Coordenadas = (coordX, coordY)
+
+
+        
         #recorro todos los eventos producidos
         for event in pygame.event.get():
             # si el evento es cerrar la ventana 
@@ -31,12 +62,13 @@ def main():
         segundos=str(segundos)##la transformamos a texto para poderla imprimir en pantalla
         contador=fuente1.render(segundos,0,(0,0,230))##imprimimos nuestro contador de tiempo
         pantalla.fill(Blanco)
-        pantalla.blit(contador,(300,5))##Imprime el tiempo del juego
         pantalla.blit(fondo,(posXfondo,posYfondo)) ## posicion del fondo
+        pantalla.blit(contador,(300,5))##Imprime el tiempo del juego
+        pantalla.blit(Imagen, Coordenadas) 
         pygame.display.update() #actualizo el display
+           
     pygame.quit()##sale de la ventana
 
 
     
 main() 
-
